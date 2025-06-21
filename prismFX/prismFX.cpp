@@ -3,13 +3,13 @@
 #include "esp_system.h"
 #include "kidbright32.h"
 #include "PrismFX.h"
-#include "font_5x7.h"
-#include "font_9x15.h"
-#include "enFont.h"
-#include "thFont.h"
+#include "font3_5x7.h"
+#include "font3_9x15.h"
+#include "enFont3.h"
+#include "thFont3.h"
 
-#include "image1.h"	// RYW logo 240x240
-#include "image2.h"	// flowers 240x240
+#include "image1.h"	// default: RYW logo 240x240 - but may be changed by users
+#include "image2.h"	// default: flowers 240x240
 
 // 26 is out OUT1, 27 is OUT2, 0 is default
 #define CS_PIN	GPIO_NUM_0
@@ -272,7 +272,7 @@ void PrismFX::drawChar5x7(char character){
 	if(foreC == backC){			// transparent printing. Just write pixels over the background
 		if( character != '\n'){
 			for(i=0; i<5; i++){
-				k = font_5x7[index + i];
+				k = font3_5x7[index + i];
 				for(j=0; j<8; j++)
 					if(k & (1<<j))
 						drawPixel(colS*6+i, rowS*8+j, foreC);
@@ -287,7 +287,7 @@ void PrismFX::drawChar5x7(char character){
 		}else{					// printable character
 			for(j=0; j<8; j++){								// for each line
 				for(i=0; i<6; i++){							// for each column
-					k = i<5 ? font_5x7[index + i] : 0;		// last column is inter character gap, all bits off
+					k = i<5 ? font3_5x7[index + i] : 0;		// last column is inter character gap, all bits off
 					c = (k & (1<<j)) ? foreC : backC;		// if bit set then use foreground color, else background
 					*p++ = c >> 8;							// put appropriate color in buffer
 					*p++ = c & 255;
@@ -315,7 +315,7 @@ void PrismFX::drawChar9x14(char character){
 	if(foreC == backC){				// transparent printing. Just write pixels over the background
 		if(character > ' '){		// printable character?
 			for(i=0; i<14; i++){
-				k = (font_9x15[index + i*107]) | (font_9x15[index + 1 + i*107] << 8);
+				k = (font3_9x15[index + i*107]) | (font3_9x15[index + 1 + i*107] << 8);
 				k >>= chr & 7;
 				for(j=0; j<9; j++)
 					if(k & 1<<j)
@@ -336,7 +336,7 @@ void PrismFX::drawChar9x14(char character){
 			}
 			// The font file is a bit array, 9 bits/char packed together, 95 chars/107 bytes
 			for(i=0; i<14; i++){		// for each line
-				k = (font_9x15[index + i*107]) | (font_9x15[index + 1 + i*107] << 8);
+				k = (font3_9x15[index + i*107]) | (font3_9x15[index + 1 + i*107] << 8);
 				k >>= chr & 7;
 				for(j=0; j<9; j++){		// for each column
 					c = (k & (1<<j)) ? foreC : backC;
@@ -715,12 +715,12 @@ void PrismFX::printGFX(uint8_t col, uint8_t row, char *message){
 
 	while(*p  && bufLen+32 < 240)	// stop if terminal null character or bitmap buffer near capacity
 		if(*p == 0xe0 && (p[1] == 0xb8 || p[1] == 0xb9)){	// is it a Thai character?
-			fnt = &thFont;	// switch to Thai characters	// switch to Thai GFX struct
+			fnt = &thFont3;	// switch to Thai characters	// switch to Thai GFX struct
 			if(p[1] == 0xb9)	bufferChar(p[2] - 0x41);
 			if(p[1] == 0xb8)	bufferChar(p[2] - 0x81);
 			p += 3;
 		}else{
-			fnt = &enFont;	// switch to ASCII characters
+			fnt = &enFont3;	// switch to ASCII characters
 			bufferChar(*p++);							// again a magic number, a different font may require a different offset
 		}
 

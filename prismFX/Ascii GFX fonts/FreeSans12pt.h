@@ -1,5 +1,4 @@
 #pragma once
-#include "gfxfont.h"
 const uint8_t xFreeSans12pt7bBitmaps[] = {
     0xFF, 0xFF, 0xFF, 0xF0, 0xF0, 0xCF, 0x3C, 0xF3, 0x8A, 0x20, 0x06, 0x30,
     0x31, 0x03, 0x18, 0x18, 0xC7, 0xFF, 0xBF, 0xFC, 0x31, 0x03, 0x18, 0x18,
@@ -264,7 +263,7 @@ const GFXglyph xFreeSans12pt7bGlyphs[] = {
     {1947, 5, 23, 8, 2, -17},   // 0x7D '}'
     {1962, 10, 5, 12, 1, -10}}; // 0x7E '~'
 
-const GFXfont enFont = {(uint8_t *)xFreeSans12pt7bBitmaps,
+const GFXfont enFont3 = {(uint8_t *)xFreeSans12pt7bBitmaps,
                                         (GFXglyph *)xFreeSans12pt7bGlyphs, 0x20,
                                         0x7E, 29};
 

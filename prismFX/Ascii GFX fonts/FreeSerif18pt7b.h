@@ -1,4 +1,4 @@
-#include "gfxfont.h"
+#pragma once
 const uint8_t FreeSerif18pt7bBitmaps[] = {
   0x6F, 0xFF, 0xFF, 0xFE, 0x66, 0x66, 0x66, 0x64, 0x40, 0x00, 0x6F, 0xF6,
   0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0x46, 0x42, 0x42, 0x42, 0x03, 0x06, 0x01,
@@ -422,7 +422,7 @@ const GFXglyph FreeSerif18pt7bGlyphs[] = {
   {  3848,   8,  30,  17,    6,  -22 },   // 0x7D '}'
   {  3878,  16,   4,  17,    1,  -10 } }; // 0x7E '~'
 
-const GFXfont enFont = {
+const GFXfont enFont3 = {
   (uint8_t  *)FreeSerif18pt7bBitmaps,
   (GFXglyph *)FreeSerif18pt7bGlyphs,
   0x20, 0x7E, 42 };

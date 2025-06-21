@@ -1,5 +1,4 @@
-#ifndef __PrismFX_H__
-#define __PrismFX_H__
+#pragma once
 
 #define MCP23S17_REG_IODIRA				0x00
 #define MCP23S17_REG_IODIRB				0x01
@@ -32,7 +31,7 @@
 #include "driver.h"
 #include "device.h"
 #include "spi-dev.h"
-#include "gfxfont.h"
+#include <gfxfont.h>
 
 const uint16_t _H = 239;	// screen height, max Y
 const uint16_t _W = 239;	// screen width, max x
@@ -120,5 +119,3 @@ class PrismFX : public Device {
 		void plotPoint	(double v1, double v2, double v3);
 		void drawImage	(uint16_t x1, uint16_t y1, uint8_t imageID);
 };
-
-#endif

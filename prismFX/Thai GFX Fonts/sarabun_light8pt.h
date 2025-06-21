@@ -1,3 +1,4 @@
+#pragma once
 // Created by ttf2gfx utility
 const uint8_t sarabun_light8ptBitmaps[] = {
     // Bitmap Data:
@@ -263,7 +264,7 @@ const GFXglyph sarabun_light8ptGlyphs[] = {
 	  {   826,   1,   1,  10,    0,   -1 }, // ' '
 	  {   827,   8,  12,  12,    1,  -12 } // 
 };
-const GFXfont thFont = {
+const GFXfont thFont3 = {
     (uint8_t  *)sarabun_light8ptBitmaps,
     (GFXglyph *)sarabun_light8ptGlyphs,
     0x00, 
